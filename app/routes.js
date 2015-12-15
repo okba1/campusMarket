@@ -11,7 +11,7 @@ module.exports = function(app, passport){
 
   app.post("/sendMail", function(req, res){
     process.nextTick(function() {
-      User.findOne({_id:req.query.ownerId}, function(err, item){
+      User.findOne({_id:req.body.ownerId}, function(err, item){
         if (err)
           throw err;
         var to = item.local.email;
