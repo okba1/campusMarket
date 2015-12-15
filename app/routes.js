@@ -9,7 +9,7 @@ var transporter = nodemailer.createTransport();
 
 module.exports = function(app, passport){
 
-  app.get("/sendMail", function(req, res){
+  app.post("/sendMail", function(req, res){
     process.nextTick(function() {
       User.findOne({_id:req.query.ownerId}, function(err, item){
         if (err)
