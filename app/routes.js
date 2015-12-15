@@ -1,4 +1,5 @@
 var Product            = require('../app/models/product');
+var User               = require('../app/models/user');
 module.exports = function(app, passport){
   app.get("/", function(req, res){
     var connected = false;
@@ -10,7 +11,7 @@ module.exports = function(app, passport){
 
   app.get('/login', function(req, res) {
     // render the page and pass in any flash data if it exists
-    res.render('login.ejs', { message: req.flash('loginMessage') }); 
+    res.render('index.ejs', {message: req.flash('loginMessage') }); 
   });
 
   app.get('/signup', function(req, res) {
@@ -65,7 +66,7 @@ module.exports = function(app, passport){
       Product.find({},function(err, items){
         if(err)
           throw err;
-        console.log(items[0]);
+        
         res.render('products-list.ejs', {products : items});
       });
     });
@@ -82,6 +83,17 @@ module.exports = function(app, passport){
     });
   });
 
+  app.get("/showEmail", function(req, res){
+     process.nextTick(function() {
+      User.findOne({_id:req.query.ownerId}, function(err, item){
+        if (err)
+          throw err;
+        console.log(item.local.email);
+        res.contentType('application/json');
+        res.send({ email: item.local.email, id:item._id});
+      });
+    });
+  });
 
   function isLoggedIn(req, res, next) {
 

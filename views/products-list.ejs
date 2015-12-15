@@ -41,7 +41,9 @@
                         <% if (products[i].toSell) {%>
                         <div class="well">
                             <%= products[i].title %>
-                            <%= products[i].description %>
+                            <%= products[i].description %><br>
+                            <button class="showEmail" id="<%= products[i].userId %>">Show Email</button>
+                            <div id="mail<%= products[i].userId %>"></div>
                         </div>
                         <% } %>
                         <% } %>
@@ -56,6 +58,7 @@
 
                     <%= products[i].title %>
                     <%= products[i].description %>
+   
                 </div>
                 <% } %>
                 <% } %>
@@ -63,5 +66,23 @@
     </div>
 
 </div>
+ <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+ <script type="text/javascript">
+    $('.showEmail').click(function(e){
+        $.ajax({
+            url: 'showEmail',
+            method: 'GET',
+            dataType: 'JSON',
+            data: {'ownerId' : this.id}, 
+            success : function(data){ // code_html contient le HTML renvoyé
+                console.log("#mail" + this.id);
+                $("#mail"+data.id).text(data.email);
+            },
+            error : function(resultat, statut, erreur){
+                console.log("error");
+            },
+        });
+    })
+ </script>
 </body>
 </html>
