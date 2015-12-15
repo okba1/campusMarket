@@ -29,6 +29,9 @@
                 <li><a href="/signup">Sign Up</a></li>
 
               </ul>
+            <% if (connected){ %>
+                <a href="/logout" class="btn btn-danger navbar-right">Logout</a>
+            <% } %>
               <form id="signin" class="navbar-form navbar-right" role="form" method='POST', action='login'>
                 <div class="input-group">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>

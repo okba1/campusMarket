@@ -40,7 +40,7 @@
                         <% for(var i=0; i<products.length; i++) { %>
                         <% if (products[i].toSell) {%>
                         <div class="well">
-                            <%= products[i].title %>
+                            <%= products[i].title %><br>
                             <%= products[i].description %><br>
                             <button class="showEmail" id="<%= products[i].userId %>">Show Email</button>
                             <div id="mail<%= products[i].userId %>"></div>
@@ -75,7 +75,6 @@
             dataType: 'JSON',
             data: {'ownerId' : this.id}, 
             success : function(data){ // code_html contient le HTML renvoyé
-                console.log("#mail" + this.id);
                 $("#mail"+data.id).text(data.email);
             },
             error : function(resultat, statut, erreur){
