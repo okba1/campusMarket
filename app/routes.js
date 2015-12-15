@@ -4,18 +4,27 @@ var nodemailer         = require('nodemailer');
 var transporter = nodemailer.createTransport();
 
 
-var mailOptions = {
-        from: "khenissiokba@gmail.com",
-        to: "khenissiokba@yahoo.fr",
-        subject: "test",
-        text: "je test",
-        html: '<b>' + "je teste" + '</b>'
-};
+
 
 
 module.exports = function(app, passport){
 
   app.get("/sendMail", function(req, res){
+    process.nextTick(function() {
+      User.findOne({_id:req.query.ownerId}, function(err, item){
+        if (err)
+          throw err;
+        var to = item.local.email;
+      });
+    });
+
+    var mailOptions = {
+      from: req.user.email,
+      to: to,
+      subject: "Campus Market",
+      text: req.body.message,
+      html: '<b>' + req.body.message + '</b>'
+    };
     transporter.sendMail(mailOptions, function(error, info){
      if(error){
         return console.log(error);

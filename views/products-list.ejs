@@ -42,8 +42,11 @@
                         <div class="well">
                             <%= products[i].title %><br>
                             <%= products[i].description %><br>
-                            <button class="showEmail" id="<%= products[i].userId %>">Show Email</button>
-                            <div id="mail<%= products[i].userId %>"></div>
+                            <form method="POST", action="/sendMail">
+                            <textarea name="message"></textarea>
+                            <input type='hidden' value="<%= products[i].userId %>">
+                            <button id="<%= products[i].userId %>">Send Email</button>
+                        </form>
                         </div>
                         <% } %>
                         <% } %>
