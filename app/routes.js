@@ -17,10 +17,10 @@ module.exports = function(app, passport){
         var to = item.local.email;
       });
     });
-
+    console.log(req.user.local.email);
     var mailOptions = {
-      from: req.user.email,
-      to: to,
+      from: req.user.local.email,
+      to: "khenissiokba@yahoo.fr",
       subject: "Campus Market",
       text: req.body.message,
       html: '<b>' + req.body.message + '</b>'
