@@ -1,7 +1,11 @@
 var Product            = require('../app/models/product');
 module.exports = function(app, passport){
   app.get("/", function(req, res){
-    res.render('index.ejs');
+    var connected = false;
+    if(req.user){
+      connected = true;
+    }
+    res.render('index.ejs', {connected : connected});
   });
 
   app.get('/login', function(req, res) {
@@ -53,9 +57,8 @@ module.exports = function(app, passport){
     newProduct.save(function(err) {
       if (err)
           throw err;
-      res.render("index.ejs");
+      res.render("index.ejs", {connected : true});
     });
-    res.render("index.ejs");
   });
   app.get("/getproducts", function(req, res){
     process.nextTick(function() {

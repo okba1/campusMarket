@@ -4,7 +4,6 @@
     <title>Sign Up</title>
     <meta charset='utf-8'/>
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="style.css">
   </head>
   <body>
     <nav class="navbar navbar-default">
@@ -22,7 +21,13 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
               <ul class="nav navbar-nav">
                 <li class="active"><a href="/">Home <span class="sr-only">(current)</span></a></li>
+                <% if (connected){ %>
+                    <li><a href="addproduct">Add Product</a></li>
+                    <li><a href="getproducts">All Products</a></li>
+                    <li><a href="myproducts">My Products</a></li>
+                <% }else{ %>
                 <li><a href="/signup">Sign Up</a></li>
+
               </ul>
               <form id="signin" class="navbar-form navbar-right" role="form" method='POST', action='login'>
                 <div class="input-group">
@@ -37,7 +42,7 @@
 
                 <button type="submit" class="btn btn-primary">Login</button>
               </form>
-             
+             <% } %>
             </div>
           </div>
         </nav>
