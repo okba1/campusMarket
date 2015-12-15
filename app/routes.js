@@ -1,6 +1,31 @@
 var Product            = require('../app/models/product');
 var User               = require('../app/models/user');
+var nodemailer         = require('nodemailer');
+var transporter = nodemailer.createTransport();
+
+
+var mailOptions = {
+        from: "khenissiokba@gmail.com",
+        to: "khenissiokba@yahoo.fr",
+        subject: "test",
+        text: "je test",
+        html: '<b>' + "je teste" + '</b>'
+};
+
+
 module.exports = function(app, passport){
+
+  app.get("/sendMail", function(req, res){
+    transporter.sendMail(mailOptions, function(error, info){
+     if(error){
+        return console.log(error);
+     }
+     console.log('Message sent: ' + info.response);
+  });
+
+  transporter.close();
+  });
+
   app.get("/", function(req, res){
     var connected = false;
     if(req.user){
