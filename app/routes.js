@@ -17,11 +17,12 @@ module.exports = function(app, passport){
         var to = item.local.email;
       });
     });
+    console.log(req.user._id);
     var mailOptions = {
-      from: req.user.email,
-      to: to,
+      from: "khenissiokba@gmail.com",
+      to: "khenissiokba@yahoo.fr",
       subject: "Campus Market",
-      text: req.body.message,
+      text: "Je suis intéressé par votre velo",
       html: '<b>' + req.body.message + '</b>'
     };
     transporter.sendMail(mailOptions, function(error, info){
@@ -29,6 +30,7 @@ module.exports = function(app, passport){
         return console.log(error);
      }
      console.log('Message sent: ' + info.response);
+     res.render("index.ejs", {connected:true});
   });
 
   transporter.close();
@@ -99,8 +101,8 @@ module.exports = function(app, passport){
       Product.find({},function(err, items){
         if(err)
           throw err;
-        
-        res.render('products-list.ejs', {products : items});
+        console.log(req.user);
+        res.render('products-list.ejs', {products : items, user:req.user});
       });
     });
   });
