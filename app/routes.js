@@ -17,13 +17,13 @@ module.exports = function(app, passport){
         var to = item.local.email;
       });
     });
-    console.log(req.user._id);
+    console.log(req.user.local.email);
     var mailOptions = {
-      from: "khenissiokba@gmail.com",
-      to: "khenissiokba@yahoo.fr",
+      from: "khenissiokba@yahoo.fr",
+      to: "khenissiokba@gmail.com",
       subject: "Campus Market",
       text: "Je suis intéressé par votre velo",
-      html: '<b>' + req.body.message + '</b>'
+      html: '<b>Bonjour</b>'
     };
     transporter.sendMail(mailOptions, function(error, info){
      if(error){
@@ -96,16 +96,30 @@ module.exports = function(app, passport){
       res.render("index.ejs", {connected : true});
     });
   });
-  app.get("/getproducts", function(req, res){
+  app.get("/offers", function(req, res){
     process.nextTick(function() {
-      Product.find({},function(err, items){
+      Product.find({toSell:true},function(err, items){
         if(err)
           throw err;
         console.log(req.user);
+        res.render('offers.ejs', {offers : items, user:req.user});
+      });
+    });
+  });
+
+  app.get("/demand", function(req, res){
+    process.nextTick(function() {
+      Product.find({toSell:false},function(err, items){
+        if(err)
+          throw err;
+       
         res.render('products-list.ejs', {products : items, user:req.user});
       });
     });
   });
+
+
+
 
   app.get("/myproducts", function(req, res){
     process.nextTick(function() {

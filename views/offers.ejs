@@ -1,0 +1,60 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Products list</title>
+        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+    </head>
+    <body>
+        <% include intern_menu.ejs %>
+        <div class="container">
+            <div class="row">
+                <% for(var i=0; i<offers.length; i+=2) { %>
+                    <div class="col-sm-6">
+                        <div class="well">
+                            <%= offers[i].title %><br>
+                            <%= offers[i].description %><br>
+                            <form method="POST", action="/sendMail">
+                                <textarea name="message"></textarea>
+                                <input type='hidden' name="ownerId" value="<%= offers[i].userId %>">
+                                <button id="<%= offers[i].userId %>">Send Email</button>
+                            </form>
+                        </div>
+                    </div>
+                    <% if (i+1<offers.length) { %>
+                        <div class="col-sm-6">
+                            <div class="well">
+                                <%= offers[i+1].title %><br>
+                                <%= offers[i+1].description %><br>
+                                <form method="POST", action="/sendMail">
+                                    <textarea name="message"></textarea>
+                                    <input type='hidden' name="ownerId" value="<%= offers[i].userId %>">
+                                    <button id="<%= offers[i].userId %>">Send Email</button>
+                                </form>
+                            </div>
+                        </div> 
+                    <% } %>
+                <% } %>
+            </div>
+        </div>
+
+
+
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+        <script type="text/javascript">
+        $('.showEmail').click(function(e){
+            $.ajax({
+                url: 'showEmail',
+                method: 'GET',
+                dataType: 'JSON',
+                data: {'ownerId' : this.id}, 
+                success : function(data){ // code_html contient le HTML renvoyé
+                    $("#mail"+data.id).text(data.email);
+                },
+                error : function(resultat, statut, erreur){
+                    console.log("error");
+                },
+            });
+        })
+        </script>
+    </body>
+</html>

@@ -4,61 +4,33 @@
     <title>Node Authentication</title>
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css"> <!-- load bootstrap css -->
 </head>
-<body>
-    <nav class="navbar navbar-default">
-        <div class="container-fluid">
-   
-            <div class="navbar-header">
-              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-              </button>
-              <a class="navbar-brand" href="/">CampusMarket</a>
-            </div>
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-              <ul class="nav navbar-nav">
-                <li class="active"><a href="/">Home <span class="sr-only">(current)</span></a></li>
-                    <li><a href="addproduct">Add Product</a></li>
-                    <li><a href="getproducts">All Products</a></li>
-                    <li><a href="myproducts">My Products</a></li>
+    <body>
+        <% include intern_menu.ejs %>  
+        <div class="container">
+        <div class="col-sm-6 col-sm-offset-3">
 
-              </ul>
-               <a href="/logout" class="btn btn-danger navbar-right">Logout</a>
-            </div>
+            <h1><span class="fa fa-sign-in"></span> Add product</h1>
+
+            <form action="/addproduct" method="post">
+                <div class="form-group">
+                    <label>Title</label>
+                    <input type="text" class="form-control" name="title">
+                </div>
+                <div class="form-group">
+                    <label>Description</label>
+                    <textarea class="form-control" name="description"></textarea>
+                </div>
+                <div class="radio">
+                    <label for='to-buy'>To buy<input type="radio" id='to-buy' name="toSell" value='false'></label>
+                </div>
+                <div class="radio">
+                    <label for='to-sell'>To sell<input type="radio"  id='to-sell' name="toSell" value='true'></label>
+                </div>      
+                
+                <button type="submit" class="btn btn-warning btn-lg">Deposer</button>
+            </form>
         </div>
-    </nav>
-<div class="container">
 
-
-<div class="col-sm-6 col-sm-offset-3">
-
-    <h1><span class="fa fa-sign-in"></span> Add product</h1>
-
-    <form action="/addproduct" method="post">
-        <div class="form-group">
-            <label>Title</label>
-            <input type="text" class="form-control" name="title">
         </div>
-        <div class="form-group">
-            <label>Description</label>
-            <textarea class="form-control" name="description"></textarea>
-        </div>
-        <div class="radio">
-            <label for='to-buy'>To buy<input type="radio" id='to-buy' name="toSell" value='false'></label>
-        </div>
-        <div class="radio">
-            <label for='to-sell'>To sell<input type="radio"  id='to-sell' name="toSell" value='true'></label>
-        </div>      
-        
-        <button type="submit" class="btn btn-warning btn-lg">Deposer</button>
-    </form>
-
-    
-
-</div>
-
-</div>
-</body>
+    </body>
 </html>
