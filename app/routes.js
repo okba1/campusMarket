@@ -113,7 +113,7 @@ module.exports = function(app, passport){
         if(err)
           throw err;
        
-        res.render('products-list.ejs', {products : items, user:req.user});
+        res.render('demand.ejs', {demand : items, user:req.user});
       });
     });
   });
