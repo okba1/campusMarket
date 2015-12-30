@@ -126,8 +126,17 @@ module.exports = function(app, passport){
       Product.find({userId:req.user.id},function(err, items){
         if(err)
           throw err;
-        console.log(items[0]);
-        res.render('products-list.ejs', {products : items});
+        res.render('myproducts.ejs', {products : items});
+      });
+    });
+  });
+
+  app.post("/deleteProduct", function(req, res){
+    process.nextTick(function(){
+      Product.findOneAndRemove({_id:req.body.productId}, function(){
+        Product.find({userId:req.user.id},function(err, items){
+          res.render('myproducts.ejs', {products : items});
+        });
       });
     });
   });
@@ -137,7 +146,6 @@ module.exports = function(app, passport){
       User.findOne({_id:req.query.ownerId}, function(err, item){
         if (err)
           throw err;
-        console.log(item.local.email);
         res.contentType('application/json');
         res.send({ email: item.local.email, id:item._id});
       });
