@@ -1,3 +1,3 @@
 module.exports = {
-    'url' : 'mongodb://127.0.0.1/seminaireDB' // looks like mongodb://<user>:<pass>@mongo.onmodulus.net:27017/Mikha4ot
+    'url' : 'mongodb://46.101.143.127/seminaireDB' // looks like mongodb://<user>:<pass>@mongo.onmodulus.net:27017/Mikha4ot
 };
