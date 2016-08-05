@@ -141,6 +141,7 @@ module.exports = function(app, passport){
     });
   });
 
+
   app.get("/showEmail", function(req, res){
      process.nextTick(function() {
       User.findOne({_id:req.query.ownerId}, function(err, item){
@@ -151,6 +152,10 @@ module.exports = function(app, passport){
       });
     });
   });
+
+  app.get("/testnodered", function(req, res){
+    res.render('testnodered.ejs');
+  })
 
   function isLoggedIn(req, res, next) {
 
